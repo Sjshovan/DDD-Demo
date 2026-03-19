@@ -19,8 +19,10 @@ const crafted: string = 'Built for';
     class="mx-auto w-full max-w-[85rem] px-4 py-10 sm:px-6 lg:px-16 lg:pt-20 2xl:max-w-(--breakpoint-2xl)"
   >
     <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-5">
-      <div class="col-span-full lg:col-span-1">
-        <BrandLogo class="h-auto w-60" />
+      <div class="col-span-full flex justify-center lg:col-span-1 lg:justify-start">
+        <div class="relative h-28 w-full max-w-[22rem] overflow-hidden">
+          <BrandLogo class="absolute top-[56%] left-1/2 h-[155%] w-auto -translate-x-1/2 -translate-y-1/2" />
+        </div>
       </div>
       {
         strings.footerLinks.map(section => (

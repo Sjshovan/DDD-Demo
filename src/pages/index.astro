@@ -3,6 +3,7 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import HeroSection from '@components/sections/landing/HeroSection.astro';
 import HeroSectionAlt from '@components/sections/landing/HeroSectionAlt.astro';
 import ClientsSection from '@components/sections/landing/ClientsSection.astro';
+import ServiceAreaSection from '@components/sections/landing/ServiceAreaSection.astro';
 import FeaturesGeneral from '@components/sections/features/FeaturesGeneral.astro';
 import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
 import TestimonialsSection from '@components/sections/testimonials/TestimonialsSection.astro';
@@ -44,7 +45,7 @@ const avatarSrcs: Array<string> = [
   <HeroSection
     title=`Drive with confidence with <span
         class="text-yellow-500 dark:text-yellow-400">Divine Drive Detail</span>`
-    subTitle="Mobile detailing built on faith, community, and business excellence. Your ride, Our Pride."
+    subTitle="Mobile detailing built on faith, community, and business excellence, proudly serving Pontiac and surrounding communities. Your ride, Our Pride."
     primaryBtn="Start Exploring"
     primaryBtnURL="/products"
     secondaryBtn="Schedule Appointment"
@@ -63,7 +64,7 @@ const avatarSrcs: Array<string> = [
   <div id="community">
     <ClientsSection
       title="Trusted by Families and Local Organizations"
-      subTitle="Service quality that keeps clients returning month after month."
+      subTitle="Service quality that keeps clients returning across Pontiac and the greater Oakland County area."
       partners={partnersData}
     />
   </div>
@@ -71,7 +72,7 @@ const avatarSrcs: Array<string> = [
   <div id="mission">
     <FeaturesGeneral
       title="Detailing That Delivers More Than Shine"
-      subTitle="Divine Drive Detail blends premium detailing with practical scheduling and community impact. We keep your car clean and reinvest into the neighborhoods we serve."
+      subTitle="Divine Drive Detail blends premium detailing with practical scheduling and community impact. We keep your car clean and reinvest into Pontiac-area neighborhoods we serve."
       src={featureImage}
       alt="Automotive detailing tools staged beside a polished vehicle"
       features={features}
@@ -103,7 +104,7 @@ const avatarSrcs: Array<string> = [
         {
           heading: 'Community Impact',
           content:
-            'A portion of selected plan revenue supports local nonprofits and outreach organizations in our area.',
+            'A portion of selected plan revenue supports local nonprofits and outreach organizations throughout the Pontiac area.',
           svg: 'house',
           src: communityImage,
           alt: 'Clean vehicle parked in a neighborhood setting',
@@ -112,10 +113,12 @@ const avatarSrcs: Array<string> = [
     />
   </div>
 
+  <ServiceAreaSection />
+
   <div id="testimonials">
     <TestimonialsSection
       title="Fast-Track Your Vehicle Care"
-      subTitle="Book in minutes, get professional results, and keep your ride ready all year."
+      subTitle="Book in minutes, get professional results, and keep your ride ready all year across Pontiac and nearby communities."
       testimonials={[
         {
           content:
