@@ -28,11 +28,13 @@ const homeUrl = withBasePath(Astro.currentLocale === 'fr' ? '/fr' : '/') ??
     <div class="flex items-center justify-between">
       {/* Brand logo */}
       <a
-        class="flex-none rounded-lg text-xl font-bold ring-zinc-500 outline-hidden focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden"
+        class="relative flex-none overflow-hidden rounded-lg text-xl font-bold ring-zinc-500 outline-hidden focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden"
         href={homeUrl}
         aria-label="Brand"
       >
-        <BrandLogo class="h-auto w-24" />
+        <div class="relative h-10 w-48 overflow-hidden md:h-11 md:w-56">
+          <BrandLogo class="absolute top-1/2 left-0 h-[145%] w-auto -translate-y-1/2" />
+        </div>
       </a>
       {/* Collapse toggle for smaller screens */}
       <div class="mr-5 ml-auto md:hidden">
