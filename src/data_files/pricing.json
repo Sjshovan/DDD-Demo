@@ -1,0 +1,38 @@
+{
+  "title": "Simple, Transparent Plans",
+  "subTitle": "Choose the care level that matches your schedule and vehicle usage.",
+  "badge": "Most popular",
+  "thirdOption": "Fleet or enterprise?",
+  "btnText": "Request a Custom Plan",
+
+  "starterKit": {
+    "name": "On-Demand Essential",
+    "description": "Best for occasional detailing needs",
+    "price": "79",
+    "cents": ".00",
+    "billingFrequency": "USD / visit",
+    "features": [
+      "Interior + exterior refresh",
+      "Window, trim, and vacuum care",
+      "Standard scheduling"
+    ],
+    "purchaseBtnTitle": "Book On-Demand",
+    "purchaseLink": "/contact"
+  },
+
+  "professionalToolbox": {
+    "name": "Recurring Covenant Care",
+    "description": "Best value for ongoing upkeep",
+    "price": "149",
+    "cents": ".00",
+    "billingFrequency": "USD / month",
+    "features": [
+      "Two monthly detail sessions",
+      "Priority booking windows",
+      "Discounted add-ons and kits",
+      "Community impact contribution"
+    ],
+    "purchaseBtnTitle": "Start Recurring Plan",
+    "purchaseLink": "/contact"
+  }
+}

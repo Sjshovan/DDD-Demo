@@ -1,0 +1,29 @@
+{
+  "subTitle": "Questions about plans, scheduling, products, and community impact.",
+  "faqs": [
+    {
+      "question": "What is included in an on-demand detailing appointment?",
+      "answer": "On-demand service includes a full exterior wash and dry, interior vacuum, wipe-down of high-touch surfaces, glass cleaning, and finishing touches. Exact scope can vary by vehicle condition."
+    },
+    {
+      "question": "How do recurring care plans work?",
+      "answer": "Recurring plans reserve regular service windows weekly or monthly. Members receive predictable scheduling, priority options, and discounted add-ons for kits and specialty treatments."
+    },
+    {
+      "question": "Can I buy products without booking a detailing service?",
+      "answer": "Yes. The Products page supports standalone purchases and is ready for third-party checkout/API integration as your store workflow evolves."
+    },
+    {
+      "question": "Do you support referral tracking and affiliate links?",
+      "answer": "The site is referral-ready and can be connected to a backend or third-party platform for full attribution, commission tracking, and payouts."
+    },
+    {
+      "question": "What areas do you currently serve?",
+      "answer": "We operate in select neighborhoods and mobile service zones. Contact us with your zip code and preferred time window to confirm availability."
+    },
+    {
+      "question": "How does Divine Drive Detail give back to the community?",
+      "answer": "A portion of select services and recurring plans supports local nonprofits and outreach initiatives. We also host periodic community service detail events."
+    }
+  ]
+}

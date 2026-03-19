@@ -1,0 +1,46 @@
+---
+const quotes = [
+  { text: 'Whatsoever thy hand findeth to do, do it with thy might.', ref: 'Ecclesiastes 9:10' },
+  { text: 'Commit thy works unto the Lord, and thy thoughts shall be established.', ref: 'Proverbs 16:3' },
+  { text: 'And let us not be weary in well doing.', ref: 'Galatians 6:9' },
+  { text: 'By love serve one another.', ref: 'Galatians 5:13' },
+  { text: 'A good name is rather to be chosen than great riches.', ref: 'Proverbs 22:1' },
+  { text: 'Let all your things be done with charity.', ref: '1 Corinthians 16:14' },
+];
+
+const quotesJson = JSON.stringify(quotes).replace(/</g, '\\u003c');
+---
+
+<section class="mx-auto max-w-[85rem] px-4 pb-4 sm:px-6 lg:px-8 2xl:max-w-full">
+  <div class="rounded-xl border border-yellow-200/60 bg-yellow-100/40 p-4 dark:border-neutral-700 dark:bg-neutral-700/40">
+    <p class="text-sm text-neutral-700 italic dark:text-neutral-200" id="bible-quote-text">
+      "{quotes[0].text}"
+    </p>
+    <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400" id="bible-quote-ref">
+      {quotes[0].ref}
+    </p>
+    <script type="application/json" id="bible-quote-data" set:html={quotesJson}></script>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const textEl = document.getElementById('bible-quote-text');
+    const refEl = document.getElementById('bible-quote-ref');
+    const raw = document.getElementById('bible-quote-data')?.textContent;
+    if (!textEl || !refEl || !raw) return;
+    let list = [];
+    try {
+      list = JSON.parse(raw);
+    } catch {
+      return;
+    }
+    if (!Array.isArray(list) || list.length === 0) return;
+    let i = Math.floor(Date.now() / 86400000) % list.length;
+    setInterval(() => {
+      i = (i + 1) % list.length;
+      textEl.textContent = `"${list[i].text}"`;
+      refEl.textContent = list[i].ref;
+    }, 7000);
+  })();
+</script>

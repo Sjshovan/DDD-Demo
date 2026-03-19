@@ -1,0 +1,130 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import CardSmall from '@components/ui/cards/CardSmall.astro';
+import CardWide from '@components/ui/cards/CardWide.astro';
+import FeaturesStatsAlt from '@components/sections/features/FeaturesStatsAlt.astro';
+import TestimonialsSectionAlt from '@components/sections/testimonials/TestimonialsSectionAlt.astro';
+
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { SITE } from '@data/constants';
+
+const product: CollectionEntry<'products'>[] = (
+  await getCollection('products', ({ id }) => {
+    return id.startsWith('en/');
+  })
+).sort(
+  (a: CollectionEntry<'products'>, b: CollectionEntry<'products'>) =>
+    a.data.main.id - b.data.main.id
+);
+
+const title: string = 'Products';
+const subTitle: string =
+  'Shop practical detailing kits, accessories, and add-ons designed to keep your vehicle clean between appointments.';
+
+const testimonials = [
+  {
+    content:
+      '"The starter kit made weekly upkeep easy between full details. The microfiber quality alone makes it worth it."',
+    author: 'Jason Clark',
+    role: 'Recurring Plan Member',
+    avatarSrc:
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
+    avatarAlt: 'Customer testimonial avatar',
+  },
+  {
+    content:
+      '"We added accessories and scent bundles for our fleet vehicles and noticed a real difference in presentation."',
+    author: 'Maria Gonzalez',
+    role: 'Operations Manager | Creative Spaces',
+    avatarSrc:
+      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
+    avatarAlt: 'Customer testimonial avatar',
+  },
+  {
+    content:
+      '"The add-on options pair perfectly with monthly appointments. It feels like having a pro-grade kit at home."',
+    author: 'Richard Kim',
+    role: 'Local Customer',
+    avatarSrc:
+      'https://images.unsplash.com/photo-1474176857210-7287d38d27c6?auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
+    avatarAlt: 'Customer testimonial avatar',
+  },
+];
+
+const pageTitle: string = `Products | ${SITE.title}`;
+const metaDescription =
+  'Explore auto detailing kits, accessories, and add-ons from Divine Drive Detail.';
+const ogTitle = 'Auto Detailing Products | Divine Drive Detail';
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://your-username.github.io/DDD-Demo/products',
+    url: 'https://your-username.github.io/DDD-Demo/products',
+    name: 'Auto Detailing Products | Divine Drive Detail',
+    description:
+      'Explore auto detailing kits, accessories, and add-ons from Divine Drive Detail.',
+    isPartOf: {
+      '@type': 'WebSite',
+      url: 'https://your-username.github.io/DDD-Demo/',
+      name: 'Divine Drive Detail',
+      description:
+        'Faith-led automotive detailing with premium care plans and community-first impact.',
+    },
+    inLanguage: 'en-US',
+  }}
+>
+  <div
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
+      <div class="flex items-center gap-12">
+        <h1
+          class="text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200"
+        >
+          {title}
+        </h1>
+        {
+          subTitle && (
+            <p class="hidden max-w-(--breakpoint-sm) text-pretty text-neutral-600 md:block dark:text-neutral-400">
+              {subTitle}
+            </p>
+          )
+        }
+      </div>
+      <PrimaryCTA title="Customer Stories" url="#testimonials" noArrow={true} />
+    </div>
+    <section class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+      {
+        product.map((product, index) => {
+          const position = index % 4;
+          if (position === 0 || position === 3) {
+            return <CardSmall product={product} />;
+          } else {
+            return <CardWide product={product} />;
+          }
+        })
+      }
+    </section>
+  </div>
+  <FeaturesStatsAlt
+    title="Why Choose Divine Drive Detail Products?"
+    subTitle="Our product lineup is designed to work with your recurring service plan and everyday upkeep routine."
+    benefits={[
+      'Detailer-tested kits made for real-world maintenance.',
+      'Bundle-ready accessories that pair with scheduled appointments.',
+      'Simple purchase flow with future API checkout integration.',
+    ]}
+  />
+  <TestimonialsSectionAlt
+    title="What Our Customers Say"
+    testimonials={testimonials}
+  />
+</MainLayout>

@@ -1,0 +1,161 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import HeroSection from '@components/sections/landing/HeroSection.astro';
+import HeroSectionAlt from '@components/sections/landing/HeroSectionAlt.astro';
+import ClientsSection from '@components/sections/landing/ClientsSection.astro';
+import FeaturesGeneral from '@components/sections/features/FeaturesGeneral.astro';
+import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
+import TestimonialsSection from '@components/sections/testimonials/TestimonialsSection.astro';
+import PricingSection from '@components/sections/pricing/PricingSection.astro';
+import FAQ from '@components/sections/misc/FAQ.astro';
+import AnnouncementBanner from '@components/ui/banners/AnnouncementBanner.astro';
+import BibleQuotes from '@components/sections/landing/BibleQuotes.astro';
+import faqs from '@data/faqs.json';
+import features from '@data/features.json';
+import pricing from '@data/pricing.json';
+import featureImageAsset from '@/images/product-image-main-1.avif';
+import { partnersData } from '@/data_files/constants';
+
+const heroImage =
+  'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1500&q=80';
+const featureImage = featureImageAsset.src;
+const onDemandImage =
+  'https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1500&q=80';
+const recurringImage =
+  'https://images.unsplash.com/photo-1607861716497-e65ab29fc7ac?auto=format&fit=crop&w=1500&q=80';
+const communityImage =
+  'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1500&q=80';
+
+const avatarSrcs: Array<string> = [
+  'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?auto=format&fit=facearea&facepad=3&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+];
+---
+
+<MainLayout>
+  <AnnouncementBanner
+    btnId="dismiss-button"
+    btnTitle="Book your next detail today"
+    url="/contact"
+  />
+
+  <HeroSection
+    title=`Drive with confidence with <span
+        class="text-yellow-500 dark:text-yellow-400">Divine Drive Detail</span>`
+    subTitle="Mobile detailing built on faith, community, and business excellence. Your ride, Our Pride."
+    primaryBtn="Start Exploring"
+    primaryBtnURL="/products"
+    secondaryBtn="Schedule Appointment"
+    secondaryBtnURL="/contact"
+    withReview={true}
+    avatars={avatarSrcs}
+    rating=`<span class="font-bold">4.9</span> / 5`
+    starCount={4}
+    reviews=`From Over <span class="font-bold">1.2k</span> Local Reviews`
+    src={heroImage}
+    alt="A polished vehicle parked on an open road"
+  />
+
+  <BibleQuotes />
+
+  <div id="community">
+    <ClientsSection
+      title="Trusted by Families and Local Organizations"
+      subTitle="Service quality that keeps clients returning month after month."
+      partners={partnersData}
+    />
+  </div>
+
+  <div id="mission">
+    <FeaturesGeneral
+      title="Detailing That Delivers More Than Shine"
+      subTitle="Divine Drive Detail blends premium detailing with practical scheduling and community impact. We keep your car clean and reinvest into the neighborhoods we serve."
+      src={featureImage}
+      alt="Automotive detailing tools staged beside a polished vehicle"
+      features={features}
+    />
+  </div>
+
+  <div id="plans">
+    <FeaturesNavs
+      title=`Customize <span class="text-yellow-500 dark:text-yellow-400">Divine Drive Detail</span> to match your lifestyle.`
+      tabs={[
+        {
+          heading: 'On-Demand Detailing',
+          content:
+            'Request same-day or next-available service for your daily driver, family SUV, or work vehicle.',
+          svg: 'tools',
+          src: onDemandImage,
+          alt: 'Black vehicle in a professional detailing bay',
+          first: true,
+        },
+        {
+          heading: 'Recurring Care Plans',
+          content:
+            'Lock in weekly or monthly slots with recurring maintenance, priority access, and add-on bundles.',
+          svg: 'dashboard',
+          src: recurringImage,
+          alt: 'Vehicle interior cleaning and detailing workflow',
+          second: true,
+        },
+        {
+          heading: 'Community Impact',
+          content:
+            'A portion of selected plan revenue supports local nonprofits and outreach organizations in our area.',
+          svg: 'house',
+          src: communityImage,
+          alt: 'Clean vehicle parked in a neighborhood setting',
+        },
+      ]}
+    />
+  </div>
+
+  <div id="testimonials">
+    <TestimonialsSection
+      title="Fast-Track Your Vehicle Care"
+      subTitle="Book in minutes, get professional results, and keep your ride ready all year."
+      testimonials={[
+        {
+          content:
+            'Divine Drive Detail keeps our family vehicles clean without disrupting our week. Booking is simple and the quality is always consistent.',
+          author: 'Samantha Ruiz',
+          role: 'Parent and Small Business Owner',
+          avatarSrc:
+            'https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
+        },
+      ]}
+      statistics={[
+        {
+          count: '2k+',
+          description: 'detailing sessions delivered across our local region',
+        },
+        {
+          count: '94%',
+          description: 'recurring plan retention from returning customers',
+        },
+        {
+          count: '$12k+',
+          description: 'directed to local community and nonprofit support',
+        },
+        {
+          count: '24h',
+          description: 'average turn-around for on-demand request windows',
+        },
+      ]}
+    />
+  </div>
+
+  <PricingSection pricing={pricing} />
+
+  <div id="faq">
+    <FAQ title="Frequently<br />asked questions" faqs={faqs} />
+  </div>
+
+  <HeroSectionAlt
+    title="Ready to Experience Divine Drive Detail?"
+    subTitle="Get premium detailing, practical care plans, and a business model that gives back to the community."
+    url="/contact"
+  />
+</MainLayout>
