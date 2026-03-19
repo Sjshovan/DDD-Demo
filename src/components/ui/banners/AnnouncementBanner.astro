@@ -1,4 +1,6 @@
 ---
+import { withBasePath } from '@utils/paths';
+
 const { title, btnId, btnTitle, url } = Astro.props;
 
 interface Props {
@@ -7,6 +9,9 @@ interface Props {
   btnTitle: string;
   url: string;
 }
+
+const resolvedUrl = withBasePath(url) ?? url;
+const bannerPatternUrl = withBasePath('/banner-pattern.svg') ?? '/banner-pattern.svg';
 ---
 
 <astro-banner btnId={btnId}>
@@ -16,7 +21,8 @@ interface Props {
     aria-label="Informational Banner"
   >
     <div
-      class="rounded-xl bg-neutral-800 bg-[url('/banner-pattern.svg')] bg-cover bg-center bg-no-repeat p-4 text-center shadow-xs dark:bg-neutral-200"
+      class="rounded-xl bg-neutral-800 bg-cover bg-center bg-no-repeat p-4 text-center shadow-xs dark:bg-neutral-200"
+      style={`background-image: url('${bannerPatternUrl}')`}
     >
       <div class="flex items-center justify-center">
         <div class="ml-auto">
@@ -29,8 +35,7 @@ interface Props {
           }
           <a
             class="group inline-flex items-center gap-x-2 rounded-full border-2 border-neutral-50 px-3 py-2 text-sm font-semibold text-neutral-50 backdrop-brightness-75 transition duration-300 hover:border-neutral-100/70 hover:text-neutral-50/70 disabled:pointer-events-none disabled:opacity-50 sm:backdrop-brightness-100 dark:border-neutral-700 dark:text-neutral-700 dark:backdrop-brightness-100 dark:hover:border-neutral-700/70 dark:hover:text-neutral-800/70 dark:focus:outline-hidden"
-            href={url}
-            target="_blank"
+            href={resolvedUrl}
           >
             {btnTitle}
             <svg

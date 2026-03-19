@@ -3,6 +3,7 @@ import { getImage } from 'astro:assets';
 import { OG, SEO, SITE } from '@data/constants';
 import faviconSvgSrc from '@images/icon.svg';
 import faviconSrc from '@images/icon.png';
+import { withBasePath } from '@utils/paths';
 
 // Default properties for the Meta component. These values are used if props are not provided.
 // 'meta' sets a default description meta tag to describe the page content.
@@ -42,6 +43,9 @@ const socialImageRes = await getImage({
   height: 600,
 });
 const socialImage = Astro.url.origin + socialImageRes.src; // Get the full URL of the image (https://stackoverflow.com/a/9858694)
+const manifestHref = withBasePath('/manifest.json') ?? '/manifest.json';
+const sitemapHref = withBasePath('/sitemap-index.xml') ?? '/sitemap-index.xml';
+const faviconIcoHref = withBasePath('/favicon.ico') ?? '/favicon.ico';
 
 const languages: { [key: string]: string } = {
   en: '',
@@ -128,12 +132,12 @@ const appleTouchIcon = await getImage({
 <meta name="twitter:image" content={socialImage} />
 
 {/* Links to the webmanifest and sitemap */}
-<link rel="manifest" href="/manifest.json" />
+<link rel="manifest" href={manifestHref} />
 {/* https://docs.astro.build/en/guides/integrations-guide/sitemap/ */}
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="sitemap" href={sitemapHref} />
 
 {/* Links for favicons */}
-<link href="/favicon.ico" rel="icon" sizes="any" type="image/x-icon" />
+<link href={faviconIcoHref} rel="icon" sizes="any" type="image/x-icon" />
 <link href={faviconSvg.src} rel="icon" type="image/svg+xml" sizes="any" />
 <meta name="mobile-web-app-capable" content="yes" />
 <link href={appleTouchIcon.src} rel="apple-touch-icon" />

@@ -1,4 +1,6 @@
 ---
+import { withBasePath } from '@utils/paths';
+
 // Destructure the properties from Astro.props
 const { url, name } = Astro.props;
 
@@ -7,6 +9,9 @@ interface Props {
   url: string;
   name: string;
 }
+
+const resolvedUrl = withBasePath(url) ?? url;
+const navId = `nav-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 ---
 
 {
@@ -18,8 +23,9 @@ If URL is '/' (home page), assign ID as 'home'
 */
 }
 <a
-  id={url === '/' ? 'home' : url.replace('/', '')}
-  href={url}
+  id={navId}
+  href={resolvedUrl}
+  data-nav-link
   data-astro-prefetch
   class="rounded-lg text-base font-medium text-neutral-600 ring-zinc-500 outline-hidden hover:text-neutral-500 focus-visible:ring-3 md:py-3 md:text-sm 2xl:text-base dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-neutral-500 dark:focus:outline-hidden"
 >
@@ -28,26 +34,31 @@ If URL is '/' (home page), assign ID as 'home'
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    let url = window.location.pathname;
-    let navId;
+    const normalizePath = (path: string) => path.replace(/\/+$/, '') || '/';
+    const currentPath = normalizePath(window.location.pathname);
 
-    if (url === '/') {
-      navId = 'home';
-    } else {
-      navId = url.replace('/', '');
-    }
+    const links = document.querySelectorAll('a[data-nav-link]');
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
 
-    let nav = document.getElementById(navId);
+      const linkUrl = new URL(href, window.location.origin);
+      const linkPath = normalizePath(linkUrl.pathname);
+      const isHome = linkPath === normalizePath(import.meta.env.BASE_URL || '/');
+      const isActive = isHome
+        ? currentPath === linkPath
+        : currentPath === linkPath || currentPath.startsWith(`${linkPath}/`);
 
-    if (nav) {
-      nav.classList.remove(
+      if (!isActive) return;
+
+      link.classList.remove(
         'text-neutral-600',
         'dark:text-neutral-400',
         'hover:text-neutral-500',
         'dark:hover:text-neutral-500'
       );
-      nav.classList.add('text-orange-400', 'dark:text-orange-300');
-      nav.setAttribute('aria-current', 'page');
-    }
+      link.classList.add('text-orange-400', 'dark:text-orange-300');
+      link.setAttribute('aria-current', 'page');
+    });
   });
 </script>

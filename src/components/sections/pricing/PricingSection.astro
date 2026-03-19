@@ -2,9 +2,15 @@
 // Import SecondaryCTA component for use in this module
 import SecondaryCTA from '@components/ui/buttons/SecondaryCTA.astro';
 import Icon from '@components/ui/icons/Icon.astro';
+import { withBasePath } from '@utils/paths';
 
 // Define props from Astro
 const { pricing } = Astro.props;
+const starterPurchaseLink =
+  withBasePath(pricing.starterKit.purchaseLink) ?? pricing.starterKit.purchaseLink;
+const proPurchaseLink =
+  withBasePath(pricing.professionalToolbox.purchaseLink) ??
+  pricing.professionalToolbox.purchaseLink;
 
 // Define TypeScript type for products.
 type Product = {
@@ -87,7 +93,7 @@ interface PricingSectionProps {
       </ul>
       {/* CTA for purchasing the product */}
       <a
-        href={pricing.starterKit.purchaseLink}
+        href={starterPurchaseLink}
         class="block rounded-lg bg-gray-500 px-8 py-3 text-center text-sm font-bold text-gray-100 ring-indigo-300 outline-hidden transition duration-100 hover:bg-gray-600 focus-visible:ring-3 active:text-gray-300 md:text-base"
         >{pricing.starterKit.purchaseBtnTitle}</a
       >
@@ -141,7 +147,7 @@ interface PricingSectionProps {
       </ul>
       {/* CTA for purchasing the product */}
       <a
-        href={pricing.professionalToolbox.purchaseLink}
+        href={proPurchaseLink}
         class="bg-opacity-50 block rounded-lg bg-orange-200/40 px-8 py-3 text-center text-sm font-bold text-neutral-100 ring-orange-300 outline-hidden transition duration-300 hover:bg-orange-300 focus-visible:ring-3 active:bg-orange-400 md:text-base"
         >{pricing.professionalToolbox.purchaseBtnTitle}</a
       >
