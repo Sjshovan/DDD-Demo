@@ -8,10 +8,12 @@ import enStrings from '@utils/navigation.ts';
 import frStrings from '@utils/fr/navigation.ts';
 import BrandLogo from '@components/BrandLogo.astro';
 import LanguagePicker from '@components/ui/LanguagePicker.astro';
+import { withBasePath } from '@utils/paths';
 
 // Select the correct translation based on the page's lang prop:
 const strings = Astro.currentLocale === 'fr' ? frStrings : enStrings;
-const homeUrl = Astro.currentLocale === 'fr' ? '/fr' : '/';
+const homeUrl = withBasePath(Astro.currentLocale === 'fr' ? '/fr' : '/') ??
+  (Astro.currentLocale === 'fr' ? '/fr' : '/');
 ---
 
 {/* Main header component */}

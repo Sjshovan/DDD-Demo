@@ -1,4 +1,5 @@
 ---
+import { withBasePath } from '@utils/paths';
 const { title, url } = Astro.props;
 
 interface Props {
@@ -13,11 +14,12 @@ const bgColorClasses = 'bg-yellow-400 dark:focus:outline-hidden';
 const hoverClasses = 'hover:shadow-2xl hover:shadow-yellow-500';
 const fontSizeClasses = '2xl:text-base';
 const ringClasses = 'dark:ring-zinc-200';
+const resolvedUrl = withBasePath(url) ?? url;
 ---
 
 <a
   class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${hoverClasses} ${fontSizeClasses} ${ringClasses}`}
-  href={url}
+  href={resolvedUrl}
 >
   {title}
 </a>

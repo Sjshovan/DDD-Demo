@@ -4,9 +4,10 @@ import ThemeIcon from '@components/ThemeIcon.astro';
 import NavLink from '@components/ui/links/NavLink.astro';
 import enStrings from '@utils/navigation.ts';
 import BrandLogo from '@components/BrandLogo.astro';
+import { withBasePath } from '@utils/paths';
 
 const strings = enStrings;
-const homeUrl = '/';
+const homeUrl = withBasePath('/') ?? '/';
 ---
 
 {/* Main header component */}
